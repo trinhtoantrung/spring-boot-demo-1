@@ -5,6 +5,8 @@ import com.spring.boot.repository.TLogDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Creation of spring-boot-demo-1.
  * <p/>
@@ -25,6 +27,11 @@ public class TLogDetailController {
   @RequestMapping(value = "tlog-detail/{id}", method = RequestMethod.GET)
   public TLogDetail get(@PathVariable Long id) {
     return tLogDetailRepository.findOne(id);
+  }
+
+  @RequestMapping(value = "tlog-detail/find/{errorMessage}", method = RequestMethod.GET)
+  public List<TLogDetail> get(@PathVariable String errorMessage) {
+    return tLogDetailRepository.findByErreurLike("%" + errorMessage + "%");
   }
 
   @RequestMapping(value = "tlog-detail", method = RequestMethod.POST)

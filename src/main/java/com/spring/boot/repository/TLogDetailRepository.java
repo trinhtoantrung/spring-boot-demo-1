@@ -4,6 +4,8 @@ import com.spring.boot.model.TLogDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Creation of spring-boot-demo-1.
  * <p/>
@@ -16,4 +18,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TLogDetailRepository extends JpaRepository<TLogDetail, Long>{
+  List<TLogDetail> findByErreurLike(String erreurString);
 }
