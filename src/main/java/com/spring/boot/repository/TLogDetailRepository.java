@@ -2,8 +2,11 @@ package com.spring.boot.repository;
 
 import com.spring.boot.model.TLogDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.NamedNativeQuery;
 import java.util.List;
 
 /**
@@ -19,4 +22,12 @@ import java.util.List;
 @Repository
 public interface TLogDetailRepository extends JpaRepository<TLogDetail, Long>{
   List<TLogDetail> findByErreurLike(String erreurString);
+
+  @Query("select log from TLogDetail log where log.erreur like :message")
+  List<TLogDetail> queryByErreur(@Param("message") String message);
+
+  @Query("select log from TLogDetail log where log.id = ?1")
+  TLogDetail queryById(Long id);
+
+  TLogDetail findByIdNativeSQL(Long id);
 }

@@ -14,6 +14,9 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "t_logdtl")
+@NamedNativeQuery(name="TLogDetail.findByIdNativeSQL", query="select * from t_logdtl where id = ?1",
+    resultClass = TLogDetail.class)
+
 public class TLogDetail {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
