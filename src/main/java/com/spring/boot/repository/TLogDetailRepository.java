@@ -1,12 +1,13 @@
 package com.spring.boot.repository;
 
 import com.spring.boot.model.TLogDetail;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.NamedNativeQuery;
 import java.util.List;
 
 /**
@@ -30,4 +31,7 @@ public interface TLogDetailRepository extends JpaRepository<TLogDetail, Long>{
   TLogDetail queryById(Long id);
 
   TLogDetail findByIdNativeSQL(Long id);
+
+  @Query("select log from TLogDetail log where log.erreur like :message and id is not null")
+  Page<TLogDetail> queryByErrorPaging(@Param("message") String message, Pageable page);
 }

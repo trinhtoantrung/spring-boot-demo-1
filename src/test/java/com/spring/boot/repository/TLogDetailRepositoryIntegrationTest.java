@@ -6,12 +6,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 /**
@@ -83,5 +88,18 @@ public class TLogDetailRepositoryIntegrationTest {
     TLogDetail updatedLog = tLogDetailRepository.findByIdNativeSQL(42L);
     System.out.println(updatedLog.getId() + " - " + updatedLog.getErreur());
     assertThat(updatedLog, notNullValue());
+  }
+
+  @Test
+  public void testQueryByErrorPaging() throws Exception {
+    Sort sort = new Sort(Sort.Direction.DESC, "id");
+    Pageable page = new PageRequest(1,13, sort);
+    Page<TLogDetail> logs = tLogDetailRepository.queryByErrorPaging("%ERR%", page);
+
+    logs.forEach(log -> {
+      System.out.println(log.getId() + " - " + log.getErreur());
+    });
+
+    assertEquals(13, logs.getSize());
   }
 }
