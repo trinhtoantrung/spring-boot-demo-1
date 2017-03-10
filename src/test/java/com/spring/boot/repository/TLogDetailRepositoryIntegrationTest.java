@@ -18,6 +18,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Creation of spring-boot-demo-1.
@@ -101,5 +102,11 @@ public class TLogDetailRepositoryIntegrationTest {
     });
 
     assertEquals(13, logs.getSize());
+  }
+
+  @Test
+  public void testExampleCustomMethod() throws Exception {
+    tLogDetailRepository.exampleCustomMethod();
+    assertTrue(true);
   }
 }

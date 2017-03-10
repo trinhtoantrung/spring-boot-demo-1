@@ -21,7 +21,7 @@ import java.util.List;
  */
 
 @Repository
-public interface TLogDetailRepository extends JpaRepository<TLogDetail, Long>{
+public interface TLogDetailRepository extends JpaRepository<TLogDetail, Long>, TLogDetailRepositoryCustom{
   List<TLogDetail> findByErreurLike(String erreurString);
 
   @Query("select log from TLogDetail log where log.erreur like :message")

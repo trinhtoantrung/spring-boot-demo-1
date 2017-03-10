@@ -134,7 +134,7 @@ proxy strategy -> migrate standard repository to jpa repository (inject jparepos
 	++ @Query("..", nativeQuery=true)
 	++ NamedNativeQuery(..)
 
-
++ Custom repository: impl suffix
 
 
 
