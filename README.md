@@ -136,6 +136,19 @@ proxy strategy -> migrate standard repository to jpa repository (inject jparepos
 
 + Custom repository: impl suffix
 
++ Auditing support
+	++ Spring data jpa annotations:
+		@CreatedBy, @CreatedDate, @LastModifiedBy, @LastModifiedDate
+	++ Example:
+	@Entity 
+	public class User user {
+		@CreatedBy
+		private User user;
+		
+		@CreatedDate
+		DateTime createdDate;
+	}
+
 
 
 
